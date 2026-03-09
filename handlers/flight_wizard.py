@@ -185,7 +185,7 @@ async def process_route(message: Message, state: FSMContext):
             metro = _get_metro(orig_iata)
             await state.update_data(_edit_mode=True, origin_airports=None, origin_airport_label=None)
             await message.answer(
-                f"Ты выбрал: <b>{origin_name}</b>\n\n"
+                
                 f"Из {_genitive(origin_name)} летают из нескольких аэропортов — выбери нужный:",
                 parse_mode="HTML",
                 reply_markup=_airport_keyboard(metro, origin_name),
@@ -200,7 +200,7 @@ async def process_route(message: Message, state: FSMContext):
         metro = _get_metro(orig_iata)
         await state.update_data(origin_airports=None, origin_airport_label=None)
         await message.answer(
-            f"Ты выбрал: <b>{origin_name}</b>\n\n"
+            
             f"Из {_genitive(origin_name)} летают из нескольких аэропортов — выбери нужный:",
             parse_mode="HTML",
             reply_markup=_airport_keyboard(metro, origin_name),
