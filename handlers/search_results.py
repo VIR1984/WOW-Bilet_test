@@ -119,9 +119,9 @@ async def _do_confirm_search(callback: CallbackQuery, state: FSMContext, data: d
             _pax = data.get('passenger_code', '1')
             _url = await convert_to_partner_link(f"https://www.aviasales.ru/search/{_o}{_d1}{_d}{_pax}")
             await callback.message.edit_text(
-                f"😔 <b>Нет данных по этому маршруту</b>\n\n"
+                f"😔 <b>К сожалению, нет данных по этому маршруту</b>\n\n"
                 f"Из <b>{data.get('origin_name', '')}</b> в <b>{country_name}</b> "
-                f"на <b>{data.get('depart_date', '')}</b> данных в кэше нет.\n\n"
+                f"на <b>{data.get('depart_date', '')}</b> данных нет.\n\n"
                 "Актуальные цены смотри на Aviasales 👇",
                 parse_mode="HTML",
                 reply_markup=InlineKeyboardMarkup(inline_keyboard=[
@@ -151,9 +151,9 @@ async def _do_confirm_search(callback: CallbackQuery, state: FSMContext, data: d
             _pax = data.get('passenger_code', '1')
             _url = await convert_to_partner_link(f"https://www.aviasales.ru/search/MOW{_d1}{_d}{_pax}")
             await callback.message.edit_text(
-                f"😔 <b>Нет данных по этому маршруту</b>\n\n"
+                f"😔 <b>К сожалению, нет данных по этому маршруту</b>\n\n"
                 f"По направлению <b>Везде → {data.get('dest_name', '')}</b> "
-                f"на <b>{data.get('depart_date', '')}</b> данных в кэше нет.\n\n"
+                f"на <b>{data.get('depart_date', '')}</b> данных нет.\n\n"
                 "Актуальные цены смотри на Aviasales 👇",
                 parse_mode="HTML",
                 reply_markup=InlineKeyboardMarkup(inline_keyboard=[
@@ -182,9 +182,9 @@ async def _do_confirm_search(callback: CallbackQuery, state: FSMContext, data: d
             _pax = data.get('passenger_code', '1')
             _url = await convert_to_partner_link(f"https://www.aviasales.ru/search/{_o}{_d1}MOW{_pax}")
             await callback.message.edit_text(
-                f"😔 <b>Нет данных по этому маршруту</b>\n\n"
+                f"😔 <b>К сожалению, нет данных по этому маршруту</b>\n\n"
                 f"Из <b>{data.get('origin_name', '')}</b> "
-                f"на <b>{data.get('depart_date', '')}</b> данных в кэше нет.\n\n"
+                f"на <b>{data.get('depart_date', '')}</b> данных нет.\n\n"
                 "Актуальные цены смотри на Aviasales 👇",
                 parse_mode="HTML",
                 reply_markup=InlineKeyboardMarkup(inline_keyboard=[
@@ -531,8 +531,7 @@ async def _show_no_flights(callback: CallbackQuery, data: dict,
 
     kb = InlineKeyboardMarkup(inline_keyboard=kb_buttons)
     await callback.message.edit_text(
-        "😔 <b>Нет данных по этому маршруту</b>\n\n"
-        "В кэше Aviasales пока нет информации по этому направлению и дате.\n\n"
+        "😔 <b>К сожалению, нет данных по этому маршруту</b>\n\n"
         "Актуальные цены смотри напрямую на Aviasales 👇",
         parse_mode="HTML", reply_markup=kb,
     )
