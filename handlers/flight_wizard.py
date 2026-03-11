@@ -380,13 +380,19 @@ async def process_return_date(message: Message, state: FSMContext):
     data = await state.get_data()
     norm_depart = normalize_date(data.get("depart_date", ""))
     norm_return = normalize_date(message.text)
-    if norm_return and norm_depart and norm_return <= norm_depart:
-        await message.answer(
-            "❌ Дата возврата не может быть раньше или равна дате вылета.\n"
-            "Укажи правильную дату возврата.",
-            reply_markup=CANCEL_KB,
-        )
-        return
+
+    # Если return перенёсся на следующий год а depart нет — сравниваем честно:
+    # берём год из norm_depart и подставляем в return для сравнения
+    if norm_return and norm_depart:
+        dep_year = norm_depart[:4]
+        ret_comparable = dep_year + norm_return[4:]  # тот же год что у вылета
+        if ret_comparable <= norm_depart:
+            await message.answer(
+                "❌ Дата возврата не может быть раньше или равна дате вылета.\n"
+                "Укажи правильную дату возврата.",
+                reply_markup=CANCEL_KB,
+            )
+            return
 
     cancel_inactivity(message.chat.id)
     await state.update_data(return_date=message.text)
